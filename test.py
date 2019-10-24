@@ -6,4 +6,3 @@ fashion_mnist = keras.datasets.fashion_mnist
 
 print("len of test_images: ",len(test_images))
 print("len of test_lables: ",len(test_labels))
-
