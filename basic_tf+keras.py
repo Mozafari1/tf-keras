@@ -1,5 +1,7 @@
 import tensorflow as tf
 from tensorflow import keras
+from keras import metrics
+
 from matplotlib import pyplot as plt         
 import numpy as np
 
@@ -18,14 +20,14 @@ model.add(tf.keras.layers.Dense(128,activation ))
 model.add(tf.keras.layers.Dense(10,activation_soft ))
 
 # defining parameter for traning data
-model.compile(optimizer ='adam', loss='sparse_categorical_crossentropy',metrix = ['accuracy'] )
+model.compile(optimizer ='adam', loss='sparse_categorical_crossentropy',metrics = ['accuracy'] )
 
 # training the model
-model.fit(train_images, train_labels, epochs = 50)
+model.fit(train_images, train_labels, epochs = 3)
 
 # Calculating the validation loss 
-#val_loss, val_accuracy = model.evaluate(test_images, test_labels) 
-#print("val_loss: ", val_loss, val_accuracy)
+val_loss, val_accuracy = model.evaluate(test_images, test_labels) 
+print("val_loss: ", val_loss, "Val accurarcy", val_accuracy)
 
 
 
@@ -44,7 +46,7 @@ model.save('test.model')
 new_model = tf.keras.models.load_model('test.model')
 
 # making prediction
-predictions  = new_model.predict([test_images])
+predictions  = new_model.predict(test_images)
 print(" predictions: ", predictions)
 
 print(np.argmax(predictions[198]))
